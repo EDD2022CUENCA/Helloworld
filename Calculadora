@@ -1,5 +1,5 @@
 import java.lang.Math;
-import java.util.Scanner;
+import java.util.*;
 
 public class calcuJenMad {
 	
@@ -22,8 +22,8 @@ public class calcuJenMad {
 		Scanner sc=new Scanner (System.in);
 		byte opc;
 		boolean salir=false;
-		int a,b;
-		double resul;
+		int num1=0,num2=0,total=0;
+		double resul=0, num3=0;
 		
 		do{
 			//Menu
@@ -41,84 +41,139 @@ public class calcuJenMad {
 			opc=sc.nextByte ();
 			System.out.print("\n\n");
 		
+			do{
 			
-	
-			switch (opc){
-				
-				case 1: //suma
-				
-					System.out.print ("introduce el operando 1: ");
-					a=sc.nextInt();
-					System.out.print ("introduce el operando 2: ");
-					b=sc.nextInt();
+				//Menu
+				System.out.println("-------------------------------------");
+				System.out.println("\t Sumar \t\t\t1");
+				System.out.println("\t Restar \t\t2");
+				System.out.println("\t Multiplicar \t\t3");
+				System.out.println("\t Dividir \t\t4");
+				System.out.println("\t Raiz Cuadrada \t\t5");
+				System.out.println("\t Potencia \t\t6");
+				System.out.println("\t Salir \t\t\t7");
+				System.out.println("-------------------------------------");
+				//Elegir una opción
+				System.out.print("\tIntroduzca una opcion: ");
+				opc=sc.nextByte ();
+				System.out.print("\n\n");
+			try{
+				switch (opc){
 					
-					resul=a+b;
-					System.out.printf ("%1$d + %2$d = %3$.0f \n\n",a,b,resul);
-				break;
-				case 2://resta
-					System.out.print ("introduce el operando 1: ");
-					a=sc.nextInt();
-					System.out.print ("introduce el operando 2: ");
-					b=sc.nextInt();
-					
-					resul=a-b;
-					System.out.printf ("%1$d - %2$d = %3$.0f \n\n",a,b,resul);
-					
-				break;	
-				case 3://multiplicar
-					System.out.print ("introduce el operando 1: ");
-					a=sc.nextInt();
-					System.out.print ("introduce el operando 2: ");
-					b=sc.nextInt();
-					
-					resul=a*b;
-					System.out.printf ("%1$d x %2$d = %3$.0f \n\n",a,b,resul);
-				break;
-				case 4://dividir
-					
-					System.out.print ("introduce el dividendo: ");
-					a=sc.nextInt();
-					System.out.print ("introduce el divisor: ");
-					b=sc.nextInt();
-						while(b==0){ //evitamos que haya divisiones entre 0, y repetimos la petición
-							System.out.println ("El divisor no puede ser cero ");
-							System.out.print ("Por favor, introduce el divisor: ");
-							b=sc.nextInt();
-						}
-						
-					resul=a/b;
-					System.out.printf ("%1$d / %2$d = %3$.3f \n\n",a,b,resul);
-			
-				break;	
-				case 5://raiz cuadrada
-					System.out.print ("introduce un número: ");
-					a=sc.nextInt();
-						while(a<0){ //evitamos que haya divisiones entre 0, y repetimos la petición
-							System.out.println ("No existen raíces cuadradas de número negativos ");
-							System.out.print ("Por favor, introduce un número: ");
-							a=sc.nextInt();
-						}
-					resul=Math.sqrt(a);//lamamos a la función de Math para realizar la raiz cuadrada
-					
-					System.out.printf ("La raiz cuadrada de %1$d es %2$.3f \n\n",a,resul);	
-				break;		
-				case 6://potencia
-					System.out.print ("introduce la base: ");
-					a=sc.nextInt();
-					System.out.print ("introduce el exponente: ");
-					b=sc.nextInt();
-					resul=Math.pow(a,b); //llamamos a la función de Math para realizar la potencia
-					
-					System.out.printf ("%1$d elevado a %2$d = %3$.0f\n\n",a,b,resul);	
-				break;
-				case 7://salir
-					System.out.println("Adiós");
-					salir=true;
-				break;
-				default:
-					System.out.println("opcion incorrecta");
-			}
+					case 1: //suma
 
+						System.out.print ("introduce el operando 1: ");
+						num1=sc.nextInt();
+						System.out.print ("introduce el operando 2: ");
+						num2=sc.nextInt();
+						total=sumar(num1,num2);
+						System.out.printf ("%1$d + %2$d = %3$d \n\n",num1,num2,total);
+					break;
+					
+					case 2://resta
+						System.out.print ("introduce el operando 1: ");
+						num1=sc.nextInt();
+						System.out.print ("introduce el operando 2: ");
+						num2=sc.nextInt();
+						total=restar(num1,num2);
+						System.out.printf ("%1$d - %2$d = %3$d \n\n",num1,num2,total);
+					break;
+						
+					case 3://multiplicar
+						System.out.print ("introduce el operando 1: ");
+						num1=sc.nextInt();
+						System.out.print ("introduce el operando 2: ");
+						num2=sc.nextInt();
+						total=multiplicar(num1,num2);
+						System.out.printf ("%1$d x %2$d = %3$d \n\n",num1,num2,total);
+					break;
+					
+					case 4://dividir
+						System.out.print ("introduce el dividendo: ");
+						num1=sc.nextInt();
+						System.out.print ("introduce el divisor: ");
+						num2=sc.nextInt();
+						resul=dividir(num1, num2);//llamamos a la función dividir
+						System.out.printf ("%1$d / %2$d = %3$.2f \n\n",num1,num2,resul);
+					break;	
+					
+					case 5://raiz cuadrada
+						System.out.print("Introduzca la base imponible: ");
+						num3=sc.nextDouble();
+						resul=raiz(num3);//lamamos a la función  para realizar la raiz cuadrada
+						System.out.printf ("La raiz cuadrada de %1$.0f es %2$.2f \n\n",num3,resul);	
+					break;		
+					
+					case 6://potencia
+						System.out.print ("introduce la base: ");
+						num1=sc.nextInt();
+						System.out.print ("introduce el exponente: ");
+						num2=sc.nextInt();
+						resul=potencia(num1,num2);
+						 //llamamos a la función para realizar la potencia
+						System.out.printf ("%1$d elevado a %2$d = %3$.0f\n\n",num1,num2,resul);	
+					break;
+					
+					case 7://salir
+						System.out.println("Adiós");
+						salir=true;
+					break;
+					
+					default:
+						System.out.println("opcion incorrecta");
+				}
+
+			}
+			catch (InputMismatchException nfe){
+				sc.nextLine();// recordar limpiar el scanner para evitar que se cree un bucle infinito
+				System.out.println("introduzca un entero");
+				
+			}
+			catch (ArithmeticException ex) {
+			System.out.println("No se puede dividir por cero");
+			}
+			catch (Exception e){
+			System.out.println(e.getMessage());
+			}
+		
 		}while(!salir);
 	}
-}
+		static int sumar (int a, int b){ //funcion sumar
+			int c;
+			c=a+b;
+			return c; //devuelve valor resultante
+		}
+	
+		static int restar (int a, int b){
+			int c;
+			c=a-b;
+			return c;
+		}
+	
+		static int multiplicar (int a, int b){
+			int c;
+			c=a*b;
+			return c;
+		}
+	
+		static double dividir (int a, int b) throws ArithmeticException {//función dividir, devuelve un double
+			double c;
+			c=a/b;
+			return c;
+		}
+		static double raiz (double a)throws Exception {
+			double c;
+			if (a<0){
+				throw new Exception ("No existe la raiz cuadrada de un número negativo");
+			}else{
+				c=Math.sqrt(a);
+			}
+			return c;
+		}
+		static double potencia (int a, int b){
+			double c;
+			c=Math.pow(a,b);
+			return c;
+		}
+		
+	}
